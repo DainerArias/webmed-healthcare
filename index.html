@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Webmed Healthcare - Sistema de Salud</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #0f172a;
+      color: #e2e8f0;
+      min-height: 100vh;
+    }
+    
+    /* ============= LOGIN STYLES ============= */
+    .login-wrapper {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+    }
+    
+    .login-container {
+      background: #1e293b;
+      border-radius: 16px;
+      padding: 2rem;
+      max-width: 440px;
+      width: 100%;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+    
+    .login-card {
+      background: #334155;
+      border: 1px solid #475569;
+      border-radius: 12px;
+      padding: 2.5rem 2rem;
+    }
+    
+    .login-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    
+    .logo-circle {
+      width: 70px;
+      height: 70px;
+      background: #1e40af;
+      border-radius: 50%;
+      margin: 0 auto 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-circle i {
+      font-size: 36px;
+      color: #60a5fa;
+    }
+    
+    .login-header h2 {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 0.5rem;
+      color: #f1f5f9;
+    }
+    
+    .login-header p {
+      font-size: 14px;
+      color: #94a3b8;
+      margin: 0;
+    }
+    
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    
+    label {
+      display: block;
+      font-size: 13px;
+      font-weight: 500;
+      margin-bottom: 8px;
+      color: #cbd5e1;
+    }
+    
+    .input-wrapper {
+      position: relative;
+    }
+    
+    .input-wrapper i {
+      position: absolute;
+      left: 14px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 18px;
+      color: #64748b;
+    }
+    
+    input[type="text"],
+    input[type="password"] {
+      width: 100%;
+      padding: 12px 14px 12px 44px;
+      background: #1e293b;
+      border: 1px solid #475569;
+      border-radius: 8px;
+      font-size: 14px;
+      color: #e2e8f0;
+      transition: all 0.2s;
+    }
+    
+    input::placeholder {
+      color: #64748b;
+    }
+    
+    input:focus {
+      outline: none;
+      border-color: #3b82f6;
+      background: #0f172a;
+    }
+    
+    .remember-forgot {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1.5rem;
+    }
+    
+    .checkbox-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      color: #94a3b8;
+      cursor: pointer;
+      font-weight: 400;
+    }
+    
+    .checkbox-label input {
+      width: 16px;
+      height: 16px;
+      cursor: pointer;
+      accent-color: #3b82f6;
+    }
+    
+    .forgot-link {
+      font-size: 13px;
+      color: #60a5fa;
+      text-decoration: none;
+    }
+    
+    .forgot-link:hover {
+      color: #93c5fd;
+      text-decoration: underline;
+    }
+    
+    .btn-login {
+      width: 100%;
+      padding: 14px;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 15px;
+      font-weight: 600;
+      cursor: pointer;
+      margin-bottom: 1rem;
+      transition: background 0.2s;
+    }
+    
+    .btn-login:hover {
+      background: #1d4ed8;
+    }
+    
+    .btn-login:active {
+      transform: scale(0.98);
+    }
+    
+    .divider {
+      text-align: center;
+      padding-top: 1.5rem;
+      border-top: 1px solid #475569;
+      margin-top: 1rem;
+    }
+    
+    .divider p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin: 0;
+    }
+    
+    .divider a {
+      color: #60a5fa;
+      text-decoration: none;
+      font-weight: 500;
+    }
+    
+    .divider a:hover {
+      text-decoration: underline;
+    }
+    
+    .security-notice {
+      margin-top: 1.5rem;
+      padding: 1rem;
+      background: #334155;
+      border: 1px solid #475569;
+      border-radius: 10px;
+    }
+    
+    .security-content {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    
+    .security-content i {
+      font-size: 28px;
+      color: #10b981;
+    }
+    
+    .security-text h3 {
+      font-size: 14px;
+      font-weight: 600;
+      margin: 0 0 4px;
+      color: #f1f5f9;
+    }
+    
+    .security-text p {
+      font-size: 12px;
+      color: #94a3b8;
+      margin: 0;
+    }
+    
+    .message {
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 13px;
+      margin-bottom: 1rem;
+      display: none;
+    }
+    
+    .error-message {
+      background: #7f1d1d;
+      border: 1px solid #991b1b;
+      color: #fca5a5;
+    }
+    
+    .success-message {
+      background: #14532d;
+      border: 1px solid #166534;
+      color: #86efac;
+    }
+
+    /* ============= DASHBOARD STYLES ============= */
+    .dashboard-wrapper {
+      display: none;
+      min-height: 100vh;
+      padding: 1rem;
+    }
+
+    .dashboard-container {
+      max-width: 1400px;
+      margin: 0 auto;
+      background: #1e293b;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      min-height: 600px;
+    }
+
+    /* Sidebar */
+    .sidebar {
+      background: #0f172a;
+      border-right: 1px solid #334155;
+      padding: 1.5rem 1rem;
+    }
+
+    .sidebar-header {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 2rem;
+      padding: 0 0.5rem;
+    }
+
+    .sidebar-logo {
+      width: 40px;
+      height: 40px;
+      background: #1e40af;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sidebar-logo i {
+      font-size: 22px;
+      color: #60a5fa;
+    }
+
+    .sidebar-title p:first-child {
+      font-size: 15px;
+      font-weight: 600;
+      margin: 0;
+      color: #f1f5f9;
+    }
+
+    .sidebar-title p:last-child {
+      font-size: 11px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 11px 14px;
+      border-radius: 8px;
+      color: #94a3b8;
+      text-decoration: none;
+      margin-bottom: 4px;
+      transition: all 0.2s;
+    }
+
+    .nav-link:hover {
+      background: #1e293b;
+      color: #e2e8f0;
+    }
+
+    .nav-link.active {
+      background: #1e40af;
+      color: white;
+    }
+
+    .nav-link i {
+      font-size: 19px;
+    }
+
+    .nav-link span {
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .nav-divider {
+      border-top: 1px solid #334155;
+      margin: 1rem 0;
+    }
+
+    /* Main Content */
+    .main-content {
+      padding: 2rem;
+      background: #0f172a;
+    }
+
+    .dashboard-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+      gap: 1rem;
+    }
+
+    .dashboard-header h1 {
+      font-size: 26px;
+      font-weight: 600;
+      margin: 0 0 0.25rem;
+      color: #f1f5f9;
+    }
+
+    .dashboard-header p {
+      font-size: 14px;
+      color: #94a3b8;
+      margin: 0;
+    }
+
+    .btn-new {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 11px 18px;
+      background: #059669;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+
+    .btn-new:hover {
+      background: #047857;
+    }
+
+    .btn-new i {
+      font-size: 18px;
+    }
+
+    /* Stats Grid */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 16px;
+      margin-bottom: 2rem;
+    }
+
+    .stat-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+
+    .stat-header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 0.75rem;
+    }
+
+    .stat-header i {
+      font-size: 22px;
+    }
+
+    .stat-header p {
+      font-size: 13px;
+      color: #94a3b8;
+      margin: 0;
+      font-weight: 500;
+    }
+
+    .stat-value {
+      font-size: 24px;
+      font-weight: 600;
+      margin: 0 0 4px;
+      color: #f1f5f9;
+    }
+
+    .stat-sub {
+      font-size: 12px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    /* History Card */
+    .history-card {
+      background: #1e293b;
+      border: 1px solid #334155;
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .history-card h3 {
+      font-size: 18px;
+      font-weight: 600;
+      margin: 0 0 1.25rem;
+      color: #f1f5f9;
+    }
+
+    .history-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid #334155;
+    }
+
+    .history-item:last-child {
+      border-bottom: none;
+    }
+
+    .history-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .history-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .history-icon i {
+      font-size: 22px;
+    }
+
+    .history-info p:first-child {
+      font-size: 14px;
+      font-weight: 500;
+      margin: 0 0 4px;
+      color: #f1f5f9;
+    }
+
+    .history-info p:last-child {
+      font-size: 13px;
+      color: #94a3b8;
+      margin: 0;
+    }
+
+    .history-date {
+      font-size: 13px;
+      color: #64748b;
+      margin: 0;
+    }
+
+    /* Utility classes */
+    .hidden {
+      display: none !important;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .sidebar {
+        border-right: none;
+        border-bottom: 1px solid #334155;
+      }
+
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- ============= LOGIN SCREEN ============= -->
+  <div class="login-wrapper" id="loginScreen">
+    <div class="login-container">
+      <div class="login-card">
+        
+        <div class="login-header">
+          <div class="logo-circle">
+            <i class="ti ti-heart-pulse"></i>
+          </div>
+          <h2>Webmed Healthcare</h2>
+          <p>Acceso a servicios medicos en linea</p>
+        </div>
+
+        <div id="errorMessage" class="message error-message"></div>
+        <div id="successMessage" class="message success-message"></div>
+
+        <form id="loginForm">
+          <div class="form-group">
+            <label for="username">Correo electronico</label>
+            <div class="input-wrapper">
+              <i class="ti ti-mail"></i>
+              <input type="text" id="username" placeholder="usuario@ejemplo.com" autocomplete="off">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password">Contraseña</label>
+            <div class="input-wrapper">
+              <i class="ti ti-lock"></i>
+              <input type="password" id="password" placeholder="••••••••">
+            </div>
+          </div>
+
+          <div class="remember-forgot">
+            <label class="checkbox-label">
+              <input type="checkbox" id="remember">
+              Recordarme
+            </label>
+            <a href="#" class="forgot-link">Olvide mi contraseña</a>
+          </div>
+
+          <button type="submit" class="btn-login">
+            Iniciar sesion
+          </button>
+
+          <div class="divider">
+            <p>
+              No tienes cuenta? <a href="#">Registrate aqui</a>
+            </p>
+          </div>
+        </form>
+
+      </div>
+
+      <div class="security-notice">
+        <div class="security-content">
+          <i class="ti ti-shield-check"></i>
+          <div class="security-text">
+            <h3>Conexion segura</h3>
+            <p>Tus datos estan protegidos con encriptacion SSL</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ============= DASHBOARD SCREEN ============= -->
+  <div class="dashboard-wrapper" id="dashboardScreen">
+    <div class="dashboard-container">
+      <div class="dashboard-grid">
+        
+        <!-- Sidebar -->
+        <div class="sidebar">
+          <div class="sidebar-header">
+            <div class="sidebar-logo">
+              <i class="ti ti-heart-pulse"></i>
+            </div>
+            <div class="sidebar-title">
+              <p>Webmed</p>
+              <p>Healthcare</p>
+            </div>
+          </div>
+
+          <nav>
+            <a href="#" class="nav-link active">
+              <i class="ti ti-layout-dashboard"></i>
+              <span>Dashboard</span>
+            </a>
+            <a href="#" class="nav-link">
+              <i class="ti ti-calendar"></i>
+              <span>Mis citas</span>
+            </a>
+            <a href="#" class="nav-link">
+              <i class="ti ti-user-search"></i>
+              <span>Buscar medico</span>
+            </a>
+            <a href="#" class="nav-link">
+              <i class="ti ti-pill"></i>
+              <span>Medicamentos</span>
+            </a>
+            <a href="#" class="nav-link">
+              <i class="ti ti-file-text"></i>
+              <span>Enfermedades A-Z</span>
+            </a>
+            <a href="#" class="nav-link">
+              <i class="ti ti-shield"></i>
+              <span>Seguros</span>
+            </a>
+            <div class="nav-divider"></div>
+            <a href="#" class="nav-link" id="logoutBtn">
+              <i class="ti ti-logout"></i>
+              <span>Cerrar sesion</span>
+            </a>
+          </nav>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+          <div class="dashboard-header">
+            <div>
+              <h1>Bienvenido, Juan Lemos</h1>
+              <p>Aqui esta tu resumen de salud</p>
+            </div>
+            <button class="btn-new">
+              <i class="ti ti-plus"></i>
+              Nueva cita
+            </button>
+          </div>
+
+          <div class="stats-grid">
+            <div class="stat-card">
+              <div class="stat-header">
+                <i class="ti ti-calendar-check" style="color: #60a5fa;"></i>
+                <p>Proxima cita</p>
+              </div>
+              <p class="stat-value">15 Mayo</p>
+              <p class="stat-sub">Dr. Martinez - 10:30 AM</p>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <i class="ti ti-file-text" style="color: #34d399;"></i>
+                <p>Recetas activas</p>
+              </div>
+              <p class="stat-value">3</p>
+              <p class="stat-sub">2 por renovar pronto</p>
+            </div>
+
+            <div class="stat-card">
+              <div class="stat-header">
+                <i class="ti ti-shield-check" style="color: #fbbf24;"></i>
+                <p>Seguro medico</p>
+              </div>
+              <p class="stat-value">Activo</p>
+              <p class="stat-sub">Plan Premium - 2026</p>
+            </div>
+          </div>
+
+          <div class="history-card">
+            <h3>Historial reciente</h3>
+            
+            <div class="history-item">
+              <div class="history-left">
+                <div class="history-icon" style="background: #1e3a8a;">
+                  <i class="ti ti-stethoscope" style="color: #60a5fa;"></i>
+                </div>
+                <div class="history-info">
+                  <p>Consulta general</p>
+                  <p>Dr. Rodriguez - Cardiologia</p>
+                </div>
+              </div>
+              <p class="history-date">22 Abril 2026</p>
+            </div>
+
+            <div class="history-item">
+              <div class="history-left">
+                <div class="history-icon" style="background: #064e3b;">
+                  <i class="ti ti-pill" style="color: #34d399;"></i>
+                </div>
+                <div class="history-info">
+                  <p>Pedido de medicamentos</p>
+                  <p>Entregado - Orden #1247</p>
+                </div>
+              </div>
+              <p class="history-date">18 Abril 2026</p>
+            </div>
+
+            <div class="history-item">
+              <div class="history-left">
+                <div class="history-icon" style="background: #78350f;">
+                  <i class="ti ti-file-description" style="color: #fbbf24;"></i>
+                </div>
+                <div class="history-info">
+                  <p>Resultados de laboratorio</p>
+                  <p>Examenes de sangre</p>
+                </div>
+              </div>
+              <p class="history-date">10 Abril 2026</p>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Elementos del DOM
+    const loginScreen = document.getElementById('loginScreen');
+    const dashboardScreen = document.getElementById('dashboardScreen');
+    const loginForm = document.getElementById('loginForm');
+    const usernameInput = document.getElementById('username');
+    const passwordInput = document.getElementById('password');
+    const errorMessage = document.getElementById('errorMessage');
+    const successMessage = document.getElementById('successMessage');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Credenciales válidas
+    const VALID_USERNAME = '123';
+    const VALID_PASSWORD = '123';
+
+    // Manejar submit del formulario
+    loginForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = usernameInput.value.trim();
+      const password = passwordInput.value.trim();
+
+      // Ocultar mensajes previos
+      hideMessages();
+
+      // Validar campos vacíos
+      if (!username || !password) {
+        showError('Por favor ingresa usuario y contraseña');
+        return;
+      }
+
+      // Validar credenciales
+      if (username === VALID_USERNAME && password === VALID_PASSWORD) {
+        showSuccess('¡Inicio de sesion exitoso! Redirigiendo...');
+        
+        // Mostrar dashboard después de 800ms
+        setTimeout(() => {
+          loginScreen.classList.add('hidden');
+          dashboardScreen.style.display = 'block';
+        }, 800);
+      } else {
+        showError('Usuario o contraseña incorrectos. Intenta con: 123 / 123');
+        passwordInput.value = '';
+        passwordInput.focus();
+      }
+    });
+
+    // Manejar logout
+    logoutBtn.addEventListener('click', function(e) {
+      e.preventDefault();
+      logout();
+    });
+
+    // Funciones auxiliares
+    function showError(message) {
+      errorMessage.textContent = message;
+      errorMessage.style.display = 'block';
+    }
+
+    function showSuccess(message) {
+      successMessage.textContent = message;
+      successMessage.style.display = 'block';
+    }
+
+    function hideMessages() {
+      errorMessage.style.display = 'none';
+      successMessage.style.display = 'none';
+    }
+
+    function logout() {
+      dashboardScreen.style.display = 'none';
+      loginScreen.classList.remove('hidden');
+      usernameInput.value = '';
+      passwordInput.value = '';
+      hideMessages();
+      usernameInput.focus();
+    }
+
+    // Focus automático al cargar
+    window.addEventListener('load', function() {
+      usernameInput.focus();
+    });
+  </script>
+
+</body>
+</html>
